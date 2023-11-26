@@ -77,8 +77,7 @@ console.log(sql);
     {
         //console.log("#get");
         try{    
-            //const sql = `SELECT * FROM Task WHERE id = ${id}`; 
-            const sql = `SELECT * FROM ErChart WHERE id = ${id}`;            
+            const sql = `SELECT * FROM TaskItem WHERE id = ${id}`;            
             const result = await DB.prepare(sql).all();
             //console.log(result.results);
             if(result.results.length < 1) {

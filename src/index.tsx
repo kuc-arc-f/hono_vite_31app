@@ -35,6 +35,8 @@ import ErCartEdit from './pages/er_chart/edit/App';
 import ProjectIndex from './pages/task_project/App';
 import TaskItemsIndex from './pages/task_items/App';
 import TaskItemsCreate from './pages/task_items/create/App';
+import TaskItemsShow from './pages/task_items/show/App';
+import TaskItemsEdit from './pages/task_items/edit/App';
 //
 app.get('/', (c) => {
   return c.html(renderToString(Top([])))
@@ -136,7 +138,19 @@ app.get('/task_items_create', async (c) => {
 console.log("project=", project);
   return c.html(renderToString(<TaskItemsCreate items={[]} project={project} />));
 });
-
+app.get('/task_items/show/:id', async (c) => { 
+  const {id} = c.req.param();
+//console.log("id=", id);
+  const item = await taskItemRouter.get(c, c.env.DB, id);
+  return c.html(renderToString(<TaskItemsShow item={item} id={Number(id)} />));
+});
+app.get('/task_items_edit/:id', async (c) => { 
+  const {id} = c.req.param();
+console.log("id=", id);
+  const item = await taskItemRouter.get(c, c.env.DB, id);
+console.log(item);
+  return c.html(renderToString(<TaskItemsEdit item={item} id={Number(id)} />));
+});
 /******
 API
 ******/

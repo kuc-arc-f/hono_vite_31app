@@ -10,7 +10,7 @@ console.log(props.item);
     <Layout title="TaskEdit">
         <div>
             <div>
-            <a href="/tasks" className="btn-outline-purple ms-2 my-2">back</a>
+            <a href={`/task_items/${props.item.projectId}`} className="btn-outline-purple ms-2 my-2">back</a>
             <hr className="my-4" />
             <h1 className="text-4xl font-bold">{props.item.title}</h1>
             <p>ID: {props.item.id}

@@ -22,20 +22,30 @@ const TaskItemCreate = {
             if(content) {
                 contentValue = content.value;
             }              
+            let start_dateValue = "";
+            const start_date = document.querySelector("#start_date") as HTMLInputElement;
+            if(start_date) {
+                start_dateValue = start_date.value;
+            }
+            let completeValue = "";
+            const complete = document.querySelector("#complete") as HTMLInputElement;
+            if(complete) {
+                completeValue = complete.value;
+            }
+//console.log("start_dateValue=", start_dateValue);
+//console.log("completeValue=", completeValue);
             const item = {
                 title: titleValue,
                 content: contentValue,
                 projectId: projectId,
-                complete: "2023-05-06 00:00:00",
-                start_date: "2023-05-06 00:00:00",
+                complete: completeValue + " 00:00:00",
+                start_date: start_dateValue + " 00:00:00",
                 status: "1",
                 userId: 0,
             }
 /*
-"complete": "2023-05-06 00:00:00",
-"start_date": "2023-05-01 00:00:00",
 */
-console.log("title=", titleValue);
+console.log(item);
             const body = JSON.stringify(item);		
             const res = await fetch("/api/tasks/create", {
                 method: 'POST',

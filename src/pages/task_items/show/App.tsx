@@ -10,32 +10,30 @@ console.log(props.item);
     <Layout title="TaskShow">
         <div>
             <div>
-            <a href="/tasks" className="btn-outline-purple ms-2 my-2">back</a>
+            <a href={`/task_items/${props.item.projectId}`} className="btn-outline-purple ms-2 my-2">back</a>
             <hr className="my-4" />
             <h1 className="text-4xl font-bold">{props.item.title}</h1>
-            <p>ID: {props.item.id}
-            , {props.item.createdAt}
-            </p>
             <hr className="my-2" />
-            content:<br />
+            <p>ID: {props.item.id}</p>
+            <hr className="my-2" />
+            <p>Start: {props.item.start_date}</p>
+            <p>Conplete: {props.item.complete}</p>
+            <hr className="my-2" />
+            <p>CreatedAt: {props.item.createdAt}</p>
+            <hr className="my-2" />
             <pre>{props.item.content}</pre>
-            <hr className="my-2" />
-            <input type="text" className="d-none" id="item_id" defaultValue={props.item.id} />
-            <div id="root"></div>
-            <button id="btn_delete" className="btn-red ms-2 my-2">Delete</button>
+            <hr className="my-8" />
             {/* TS */}
-            {import.meta.env.PROD ? (
-                <script src="/static/TaskShow.js"></script>
-            ) : (
-                <script src="/src/client/TaskShow.ts"></script>
-            )}
+
         </div>       
         </div>
     </Layout>
     )
 }
-
-
 /*
-{html`<script src="/js/tasks/delete.js?${timeStamp}"></script>`}
+    {import.meta.env.PROD ? (
+        <script src="/static/TaskShow.js"></script>
+    ) : (
+        <script src="/src/client/TaskShow.ts"></script>
+    )}
 */

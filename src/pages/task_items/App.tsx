@@ -19,7 +19,7 @@ console.log("id=", props.id);
     <div>
         <h1 className="text-4xl font-bold">Tasks-index</h1>
         <hr className="my-2" />
-        <a href={`/task_items_create?project=${props.id}`} className="btn-outline-purple ms-2 my-2">Create</a>
+        <a href={`/task_items_create?project=${props.id}`} className="btn-purple ms-2 my-2">Create</a>
         <hr className="my-2" />
         <ul>
         {props.items.map((item: any) => {
@@ -28,13 +28,13 @@ console.log("id=", props.id);
             <a href={`/tasks/${item.id}`}><h3 className="text-3xl font-bold"
             >{item.title}</h3></a>
             <p>ID: {item.id}, {item.createdAt}</p>
-            {/*
-            <a href={`/tasks/${item.id}`}>
+            <a href={`/task_items/show/${item.id}`}>
                 <button  className="btn-outline-purple ms-2 my-2">Show</button>
             </a>
-            <a href={`/tasks_edit/${item.id}`}>
+            <a href={`/task_items_edit/${item.id}`}>
                 <button  className="btn-outline-purple ms-2 my-2">Edit</button>
             </a>              
+            {/*
             */}
             <hr className="my-2" />
           </li>
