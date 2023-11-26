@@ -27,6 +27,8 @@ import TaskEdit from './pages/tasks/edit/App';
 import ErCartIndex from './pages/er_chart/App';
 import ErCartCreate from './pages/er_chart/create/App';
 import ErCartShow from './pages/er_chart/show/App';
+import ErCartEdit from './pages/er_chart/edit/App';
+
 //
 app.get('/', (c) => {
   return c.html(renderToString(Top([])))
@@ -102,6 +104,13 @@ app.get('/er_chart/:id', async (c) => {
 //console.log("id=", id);
   const item = await erChartRouter.get(c, c.env.DB, id);
   return c.html(renderToString(<ErCartShow item={item} id={Number(id)} />));
+});
+app.get('/er_chart_edit/:id', async (c) => { 
+  const {id} = c.req.param();
+console.log("id=", id);
+  const item = await erChartRouter.get(c, c.env.DB, id);
+console.log(item);
+  return c.html(renderToString(<ErCartEdit item={item} id={Number(id)} />));
 });
 
 /******

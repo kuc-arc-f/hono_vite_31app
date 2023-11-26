@@ -16,6 +16,8 @@ export default defineConfig(({ mode }) => {
             './src/client/TaskIndex.ts',
             './src/client/TaskEdit.ts',
             './src/client/ErChartIndex.ts',
+            './src/client/ErChartShow.ts',
+            './src/client/ErChartEdit.ts',
             './src/client/MermaidImport.ts',
           ],
           formats: ['es'],

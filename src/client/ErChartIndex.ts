@@ -60,7 +60,7 @@ console.log(json);
             const result = await this.addItem();
 console.log("result=", result);
             if(result === true) {
-                location.reload();
+                window.location.href = '/er_chart';
             }
         }); 
     },

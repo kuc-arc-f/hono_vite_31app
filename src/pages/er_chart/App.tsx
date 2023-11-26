@@ -30,7 +30,7 @@ export default function Page(props: any) {
             <a href={`/er_chart/${item.id}`}>
                 <button  className="btn-outline-purple ms-2 my-2">Show</button>
             </a>
-            <a href={`/er_chart/${item.id}`}>
+            <a href={`/er_chart_edit/${item.id}`}>
                 <button  className="btn-outline-purple ms-2 my-2">Edit</button>
             </a>              
             <hr />

@@ -37,13 +37,13 @@ console.log(props.item);
             {/* TS */}
             {import.meta.env.PROD ? (
             <>
-                <script type="module" src="/static/TaskShow.js"></script>
-                <script type="module" src="/static/TaskEdit.js"></script>
+                <script type="module" src="/static/ErChartShow.js"></script>
+                <script type="module" src="/static/ErChartEdit.js"></script>
             </>               
             ) : (
             <>
-                <script type="module" src="/src/client/TaskShow.ts"></script>
-                <script type="module" src="/src/client/TaskEdit.ts"></script>
+                <script type="module" src="/src/client/ErChartShow.ts"></script>
+                <script type="module" src="/src/client/ErChartEdit.ts"></script>
             </>                
             )}
         </div>       

@@ -4,7 +4,7 @@
 let itemId = 0;
 //
 //
-const TaskShow = {
+const ErChartShow = {
     testFunc: function(n: number){
         console.log("testFunc=", n);
     },
@@ -27,7 +27,7 @@ console.log(item);
 //return;
 //console.log("title=", titleValue);
             const body = JSON.stringify(item);		
-            const res = await fetch("/api/test/delete", {
+            const res = await fetch("/api/er_chart/delete", {
                 method: 'POST',
                 headers: {'Content-Type': 'application/json'},      
                 body: body
@@ -63,13 +63,14 @@ console.log("#startProc");
             //btn
             const item_id = document.querySelector('#item_id') as HTMLInputElement;
             if(item_id) { itemId = Number(item_id.value);}
+console.log("ErChartShow.item_id=" , itemId);
             const button = document.querySelector('#btn_delete') as HTMLElement;
             button.addEventListener('click', async () => {
 //console.log("btn_delete=");
                 const result = await this.delete();
 console.log("result=", result);
                 if(result === true) {
-                    window.location.href = '/tasks';
+                    window.location.href = '/er_chart';
                 }
             });
 //console.log("itemId=", itemId) 
@@ -78,4 +79,4 @@ console.log("result=", result);
         }    
     },
 }
-TaskShow.startProc();
+ErChartShow.startProc();
