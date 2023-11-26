@@ -7,10 +7,10 @@ export default function Page(props: any) {
 console.log("#taskShow");
 console.log(props.item);
     return (
-    <Layout title="TaskEdit">
+    <Layout title="Edit">
         <div>
             <div>
-            <a href="/tasks" className="btn-outline-purple ms-2 my-2">back</a>
+            <a href="/er_chart" className="btn-outline-purple ms-2 my-2">back</a>
             <hr className="my-4" />
             <h1 className="text-4xl font-bold">{props.item.title}</h1>
             <p>ID: {props.item.id}
