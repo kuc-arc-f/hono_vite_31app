@@ -12,6 +12,9 @@ import testRouter from './routes/test';
 import taskRouter from './routes/tasks';
 import todosRouter from './routes/todo';
 import erChartRouter from './routes/ErChart';
+import projectRouter from './routes/Project';
+import taskItemRouter from './routes/TaskItem';
+
 //pages
 import Top from './pages/Top';
 import Test1 from './pages/test/App';
@@ -28,7 +31,10 @@ import ErCartIndex from './pages/er_chart/App';
 import ErCartCreate from './pages/er_chart/create/App';
 import ErCartShow from './pages/er_chart/show/App';
 import ErCartEdit from './pages/er_chart/edit/App';
-
+/* project */
+import ProjectIndex from './pages/task_project/App';
+import TaskItemsIndex from './pages/task_items/App';
+import TaskItemsCreate from './pages/task_items/create/App';
 //
 app.get('/', (c) => {
   return c.html(renderToString(Top([])))
@@ -112,6 +118,24 @@ console.log("id=", id);
 console.log(item);
   return c.html(renderToString(<ErCartEdit item={item} id={Number(id)} />));
 });
+//Project
+app.get('/project', async (c) => { 
+  const items = await projectRouter.get_list(c, c.env.DB, 1);
+  return c.html(renderToString(<ProjectIndex items={items} page={1} />));
+});
+//taskItemRouter
+app.get('/task_items/:id', async (c) => { 
+  const {id} = c.req.param();
+  console.log("id=", id);
+  const items = await taskItemRouter.get_list(id, c.env.DB);
+  return c.html(renderToString(<TaskItemsIndex items={items} page={1} id={id} />));
+});
+app.get('/task_items_create', async (c) => { 
+  let project = c.req.query('project');
+//  if(!page) { page = '1';}
+console.log("project=", project);
+  return c.html(renderToString(<TaskItemsCreate items={[]} project={project} />));
+});
 
 /******
 API
@@ -130,31 +154,6 @@ app.get('/api/test1', async (c) => {
   const result = await  c.env.DB.prepare(`SELECT * FROM Task ORDER BY id DESC`).all();
   console.log(result.results); 
   return Response.json({ret: "OK", data: result.results});
-});
-/* tasks */
-app.post('/api/tasks/get_list', async (c) => { 
-  const resulte = await taskRouter.get_list(c, c.env.DB);
-  return c.json({ret: "OK", data: resulte});
-});
-app.post('/api/tasks/get', async (c) => { 
-  const body = await c.req.json();
-  const resulte = await taskRouter.get(body, c, c.env.DB);
-  return c.json({ret: "OK", data: resulte});
-});
-app.post('/api/tasks/create', async (c) => { 
-  const body = await c.req.json();
-  const resulte = await taskRouter.create(body, c.env.DB);
-  return c.json(resulte);
-});
-app.post('/api/tasks/update', async (c) => { 
-  const body = await c.req.json();
-  const resulte = await taskRouter.update(body, c.env.DB);
-  return c.json(resulte);
-});
-app.post('/api/tasks/delete', async (c) => { 
-  const body = await c.req.json();
-  const resulte = await taskRouter.delete(body, c.env.DB);
-  return c.json(resulte);
 });
 /* todos */
 app.post('/api/todos/get_list', async (c) => { 
@@ -198,5 +197,37 @@ app.post('/api/er_chart/update', async (c) => {
   const resulte = await erChartRouter.update(body, c.env.DB);
   return c.json(resulte);
 });
-
+//projectRouter
+app.post('/api/project/create', async (c) => { 
+  const body = await c.req.json();
+  const resulte = await projectRouter.create(body, c.env.DB);
+  return c.json(resulte);
+});
+app.post('/api/project/get_list', async (c) => { 
+  const resulte = await projectRouter.get_list(c, c.env.DB);
+  return c.json({ret: "OK", data: resulte});
+});
+app.post('/api/project/delete', async (c) => { 
+  const body = await c.req.json();
+  const resulte = await projectRouter.delete(body, c.env.DB);
+  return c.json(resulte);
+});
+app.post('/api/project/update', async (c) => { 
+  const body = await c.req.json();
+  const resulte = await projectRouter.update(body, c.env.DB);
+  return c.json(resulte);
+});
+//taskItemRouter
+app.post('/api/tasks/create', async (c) => { 
+  const body = await c.req.json();
+  const resulte = await taskItemRouter.create(body, c.env.DB);
+  return c.json(resulte);
+});
+/*
+app.post('/api/tasks/get_list', async (c) => { 
+  const body = await c.req.json();
+  const resulte = await taskItemRouter.get_list(body, c.env.DB);
+  return c.json({ret: "OK", data: resulte});
+});
+*/
 export default app
