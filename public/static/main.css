@@ -573,11 +573,6 @@ video {
   margin-right: auto;
 }
 
-.my-12 {
-  margin-top: 3rem;
-  margin-bottom: 3rem;
-}
-
 .my-2 {
   margin-top: 0.5rem;
   margin-bottom: 0.5rem;
@@ -611,6 +606,18 @@ video {
 
 .h-32 {
   height: 8rem;
+}
+
+.h-48 {
+  height: 12rem;
+}
+
+.h-64 {
+  height: 16rem;
+}
+
+.h-96 {
+  height: 24rem;
 }
 
 .w-full {

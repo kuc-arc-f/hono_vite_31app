@@ -11,7 +11,7 @@ console.log(props.item);
         <div>
             <div>
             <a href="/er_chart" className="btn-outline-purple ms-2 my-2">back</a>
-            <hr className="my-4" />
+            <hr className="my-2" />
             <h1 className="text-4xl font-bold">{props.item.title}</h1>
             <p>ID: {props.item.id}
             , {props.item.createdAt}
@@ -25,7 +25,7 @@ console.log(props.item);
             <hr className="my-2" />
             <label>Content:</label>
             <textarea id="content" name="content"
-            className="border border-gray-400 rounded-md px-3 py-2 w-full h-32 resize-none focus:outline-none focus:border-blue-500"
+            className="border border-gray-400 rounded-md px-3 py-2 w-full h-96 resize-none focus:outline-none focus:border-blue-500"
             placeholder="" required
             >{props.item.content}</textarea>
             <hr className="my-2" />
@@ -34,6 +34,7 @@ console.log(props.item);
             <button id="btn_save" className="btn-purple ms-2 my-2">Save</button>
             <hr className="my-2" />
             <button id="btn_delete" className="btn-red ms-2 my-2">Delete</button>
+            <hr className="my-8" />
             {/* TS */}
             {import.meta.env.PROD ? (
             <>
