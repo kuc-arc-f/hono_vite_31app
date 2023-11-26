@@ -6,7 +6,7 @@
 
  date    : 2023/11/24
 
- update  :
+ update  : 2023/11/26
 
 ***
 ### Summary
@@ -18,6 +18,7 @@ hono + react SSR + D1 + pages, app sample
 ***
 ### blog 
 
+https://zenn.dev/knaka0209/scraps/364d0b0fc153db
 
 ***
 
