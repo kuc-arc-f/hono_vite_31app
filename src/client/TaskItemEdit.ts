@@ -1,9 +1,9 @@
 import { marked } from 'marked';
 import MicroModal from 'micromodal';
 let itemId = 0;
-console.log("#TaskProjectEdit.client=");
+console.log("#TaskItemEdit.client=");
 //
-const TaskProjectEdit = {
+const TaskItemEdit = {
     /**
      *
      * @param
@@ -23,16 +23,30 @@ const TaskProjectEdit = {
             const content = document.querySelector("#content") as HTMLInputElement;
             if(content) {
                 contentValue = content.value;
-            }            
+            }       
+            let start_dateValue = "";
+            const start_date = document.querySelector("#start_date") as HTMLInputElement;
+            if(start_date) {
+                start_dateValue = start_date.value;
+            }
+            let completeValue = "";
+            const complete = document.querySelector("#complete") as HTMLInputElement;
+            if(complete) {
+                completeValue = complete.value;
+            }     
             const item = {
                 //@ts-ignore
                 id: Number(itemId),
                 title: titleValue,
                 content: contentValue,
+                complete: completeValue + " 00:00:00",
+                start_date: start_dateValue + " 00:00:00",                
+                status: "1",
+                userId: 0,
             }
 //console.log(item);
             const body = JSON.stringify(item);		
-            const res = await fetch("/api/er_chart/update", {
+            const res = await fetch("/api/tasks/update", {
                 method: 'POST',
                 headers: {'Content-Type': 'application/json'},      
                 body: body
@@ -84,18 +98,20 @@ console.log(json);
     {
         try{
 console.log("#startProc");
-//            MicroModal.init();
             //
             const item_id = document.querySelector('#item_id') as HTMLInputElement;
             if(item_id) { itemId = Number(item_id.value);}
 console.log("itemId=", itemId) 
+            let project_idValue = "";
+            const project_id = document.querySelector('#project_id') as HTMLInputElement;
+            if(project_id) { project_idValue = project_id.value;}
             const button = document.querySelector('#btn_save') as HTMLElement;
             button.addEventListener('click', async () => {
 console.log("btn_save=");
                 const result = await this.update();
 console.log("result=", result);
                 if(result === true) {
-                    window.location.href = '/er_chart';
+                    window.location.href = '/task_items/' + project_idValue;
                 }
             });
         } catch (e) {
@@ -103,4 +119,4 @@ console.log("result=", result);
         }    
     },
 }
-TaskProjectEdit.startProc();
+TaskItemEdit.startProc();

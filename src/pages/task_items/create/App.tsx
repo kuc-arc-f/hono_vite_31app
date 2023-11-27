@@ -16,7 +16,7 @@ console.log("project=", props.project);
     <Layout title="TaskEdit">
         <div>
             <div>
-            <a href="/er_chart" className="btn-outline-purple ms-2 my-2">back</a>
+            <a href={`/task_items/${props.project}`} className="btn-outline-purple ms-2 my-2">back</a>
             <hr className="my-2" />
             <h1 className="text-4xl font-bold">Create</h1>
             projectId: {props.project}
@@ -61,4 +61,5 @@ console.log("project=", props.project);
     )
 }
 /*
+<a href="/er_chart" className="btn-outline-purple ms-2 my-2">back</a>
 */

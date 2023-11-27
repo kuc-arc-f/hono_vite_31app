@@ -121,19 +121,24 @@ console.log(sql);
      */    
     update: async function(body, DB)
     {
+        const retObj = {ret: "NG", data: [], message: ''}
         try{    
 console.log(body);
             if (body) {
                 /*
                 const sql = `
-                UPDATE ErChart 
-                SET title = '${body.title}', content='${body.content}'
+                UPDATE Project 
+                SET name = '${body.name}', InveiteCode = '${body.InveiteCode}'
                 WHERE id = ${body.id}
                 `;
                 */
                 const sql = `
-                UPDATE Project 
-                SET name = '${body.name}', InveiteCode = '${body.InveiteCode}'
+                UPDATE TaskItem 
+                SET title = '${body.title}',
+                content='${body.content}',
+                complete = datetime('${body.complete}', 'localtime'),
+                start_date = datetime('${body.start_date}', 'localtime'),
+                status = '${body.status}'
                 WHERE id = ${body.id}
                 `;
 console.log(sql);
@@ -143,6 +148,7 @@ console.log(sql);
         } catch (e) {
             console.error(e);
             return [];
+//            return retObj;
         } 
     },
 }

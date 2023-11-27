@@ -237,6 +237,11 @@ app.post('/api/tasks/create', async (c) => {
   const resulte = await taskItemRouter.create(body, c.env.DB);
   return c.json(resulte);
 });
+app.post('/api/tasks/update', async (c) => { 
+  const body = await c.req.json();
+  const resulte = await taskItemRouter.update(body, c.env.DB);
+  return c.json(resulte);
+});
 /*
 app.post('/api/tasks/get_list', async (c) => { 
   const body = await c.req.json();
