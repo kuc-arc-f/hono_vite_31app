@@ -102,7 +102,7 @@ console.log(sql);
 //console.log(body);
             if (body) {
                 const sql = `
-                DELETE FROM Project WHERE id= ${body.id};
+                DELETE FROM TaskItem WHERE id= ${body.id};
                 `;
 console.log(sql);
                 await DB.prepare(sql).run();

@@ -69,7 +69,47 @@ console.log(json);
             throw new Error('Error , addItem');
         }
     },  
-    // showProc
+    /**
+     *
+     * @param
+     *
+     * @return
+     */  
+    delete : async function()
+    {
+        try{
+            let ret = false;
+            const item = {
+                api_key: "",
+                //@ts-ignore
+                id: Number(itemId),
+            }
+console.log(item);
+//console.log("title=", titleValue);
+            const body = JSON.stringify(item);		
+            const res = await fetch("/api/tasks/delete", {
+                method: 'POST',
+                headers: {'Content-Type': 'application/json'},      
+                body: body
+            });
+            if (res.status !== 200) {
+                console.error("error, status <> 200");
+                throw new Error(await res.text());
+            }
+            const json = await res.json()
+console.log(json);   
+            if (json.ret !==  "OK") {
+                console.error("Error, json.ret <> OK");
+                return ret;
+            }
+            ret = true;
+            return ret;
+        } catch (e) {
+            console.error("Error, delete");
+            console.error(e);
+            throw new Error('Error , delete');
+        }
+    },
     /**
      * startProc
      * @param
@@ -109,6 +149,15 @@ console.log("itemId=", itemId)
             button.addEventListener('click', async () => {
 console.log("btn_save=");
                 const result = await this.update();
+console.log("result=", result);
+                if(result === true) {
+                    window.location.href = '/task_items/' + project_idValue;
+                }
+            });
+            //btn_delete
+            const btn_delete = document.querySelector('#btn_delete') as HTMLElement;
+            btn_delete.addEventListener('click', async () => {
+                const result = await this.delete();
 console.log("result=", result);
                 if(result === true) {
                     window.location.href = '/task_items/' + project_idValue;

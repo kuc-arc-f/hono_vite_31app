@@ -21,12 +21,22 @@ console.log(props.item);
             <hr className="my-2" />
             <p>CreatedAt: {props.item.createdAt}</p>
             <hr className="my-2" />
-            <pre>{props.item.content}</pre>
+            <pre className="pre_text">{props.item.content}</pre>
             <hr className="my-8" />
             {/* TS */}
 
-        </div>       
+            </div>       
         </div>
+        {/* CSS */}
+        <style>{`
+        .pre_text {
+            border: 1px solid #000;
+            background: #eee;
+            padding: 10px;
+            font-family: BlinkMacSystemFont,"Segoe UI",Roboto !import;
+            font-size: 1rem;
+        }  
+        `}</style>
     </Layout>
     )
 }
