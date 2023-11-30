@@ -16,10 +16,11 @@ console.log(props.item);
             <hr className="my-2" />
             <p>ID: {props.item.id}</p>
             <hr className="my-2" />
-            <p>Start: {props.item.start_date}</p>
-            <p>Conplete: {props.item.complete}</p>
-            <hr className="my-2" />
             <p>CreatedAt: {props.item.createdAt}</p>
+            <hr className="my-2" />
+            <p>Start: {props.item.start_date}</p>
+            <hr className="my-2" />
+            <p>Conplete: {props.item.complete}</p>
             <hr className="my-2" />
             <pre className="pre_text">{props.item.content}</pre>
             <hr className="my-8" />

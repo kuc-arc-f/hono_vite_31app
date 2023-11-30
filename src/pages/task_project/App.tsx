@@ -38,13 +38,15 @@ export default function Page(props: any) {
             <a href={`/task_items/${item.id}`}><h3 className="text-3xl font-bold"
             >{item.name}</h3></a>
             <p>ID: {item.id}, {item.createdAt}</p>
+            <a href={`/task_items/${item.id}`}>
+                <button  className="btn-outline-purple ms-2 my-2">Show</button>
+            </a>
+            <a href={`/task_gantt/${item.id}`}>
+                <button  className="btn-outline-purple ms-2 my-2">Gantt</button>
+            </a>
             {/*
             <a href={`/tasks/${item.id}`}>
                 <button  className="btn-outline-purple ms-2 my-2">Show</button>
-            </a>
-            <a href={`/tasks_edit/${item.id}`}>
-                <button  className="btn-outline-purple ms-2 my-2">Edit</button>
-            </a>              
             */}
             <hr className="my-2" />
           </li>

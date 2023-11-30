@@ -22,7 +22,7 @@ const Router = {
             `;  
 console.log(sql);
             const result = await DB.prepare(sql).all();
-console.log(result.results);
+//console.log(result.results);
             if(result.results.length < 1) {
                 console.error("Error, results.length < 1");
                 return [];

@@ -37,6 +37,7 @@ import TaskItemsIndex from './pages/task_items/App';
 import TaskItemsCreate from './pages/task_items/create/App';
 import TaskItemsShow from './pages/task_items/show/App';
 import TaskItemsEdit from './pages/task_items/edit/App';
+import TaskGanttIndex from './pages/task_gantt/App';
 //
 app.get('/', (c) => {
   return c.html(renderToString(Top([])))
@@ -129,6 +130,8 @@ app.get('/project', async (c) => {
 app.get('/task_items/:id', async (c) => { 
   const {id} = c.req.param();
   console.log("id=", id);
+  const project = await projectRouter.get(c, c.env.DB, id);
+console.log(project);
   const items = await taskItemRouter.get_list(id, c.env.DB);
   return c.html(renderToString(<TaskItemsIndex items={items} page={1} id={id} />));
 });
@@ -151,6 +154,17 @@ console.log("id=", id);
 console.log(item);
   return c.html(renderToString(<TaskItemsEdit item={item} id={Number(id)} />));
 });
+app.get('/task_gantt/:id', async (c) => { 
+  const {id} = c.req.param();
+  console.log("id=", id);
+  const project = await projectRouter.get(c, c.env.DB, id);
+  console.log(project.name);
+  const items = await taskItemRouter.get_list(id, c.env.DB);
+  return c.html(renderToString(
+    <TaskGanttIndex items={items} page={1} id={id} project={project} />
+  ));
+});
+
 /******
 API
 ******/
