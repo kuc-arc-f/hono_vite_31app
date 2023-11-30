@@ -2,16 +2,18 @@ import Layout from '../../layout';
 import LibCommon from '../../../lib/LibCommon';
 //
 import React from 'react';
+import moment from 'moment';
 //
-const dt = LibCommon.formatDate(new Date(), 'YYYY-MM-DD');
-let complete = dt;
-let start_date = dt;
-
+//const dt = LibCommon.formatDate(new Date(), 'YYYY-MM-DD');
+const dtNow = moment().format("YYYY-MM-DD");
+let complete = dtNow;
+let start_date = dtNow;
 //
 export default function Page(props: any) {
+console.log(dtNow);
 console.log("#taskShow");
 console.log("project=", props.project);
-//console.log(props.project);
+//console.log(props);
     return (
     <Layout title="TaskEdit">
         <div>
@@ -28,11 +30,11 @@ console.log("project=", props.project);
             <hr className="my-2" />
             <label className="col-sm-12">Start:</label>
             <input type="date"  className="ms-2"  id="start_date"                  
-            defaultValue={start_date} />
+            />
             <hr className="my-2" />
             <label className="col-sm-12">Complete:</label>
             <input type="date"  className="ms-2"  id="complete"                  
-            defaultValue={complete} />
+             />
 
             <hr className="my-2" />
             <label  className="text-2xl block text-gray-700 font-bold mb-2">Content</label>
@@ -61,5 +63,6 @@ console.log("project=", props.project);
     )
 }
 /*
-<a href="/er_chart" className="btn-outline-purple ms-2 my-2">back</a>
+<input type="date"  className="ms-2"  id="start_date"                  
+defaultValue={start_date} />
 */

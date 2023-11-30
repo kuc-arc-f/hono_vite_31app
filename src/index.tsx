@@ -131,7 +131,7 @@ app.get('/task_items/:id', async (c) => {
   const {id} = c.req.param();
   console.log("id=", id);
   const project = await projectRouter.get(c, c.env.DB, id);
-console.log(project);
+//console.log(project);
   const items = await taskItemRouter.get_list(id, c.env.DB);
   return c.html(renderToString(<TaskItemsIndex items={items} page={1} id={id} />));
 });

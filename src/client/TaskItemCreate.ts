@@ -1,3 +1,4 @@
+import moment from 'moment';
 
 console.log("#TaskItemCreate.client.ts");
 //
@@ -79,6 +80,16 @@ console.log(json);
         if(project_id) {
             projectIdValue = Number(project_id.value);
 console.log("projectIdValue=", projectIdValue);
+        }
+        //start_date
+        const dtNow = moment().format("YYYY-MM-DD");
+        const start_date = document.querySelector('#start_date') as HTMLInputElement;
+        if(start_date){
+            start_date.value = dtNow;
+        }
+        const complete = document.querySelector('#complete') as HTMLInputElement;
+        if(complete){
+            complete.value = dtNow;
         }
         //btn
         const button = document.querySelector('#btn_save');
