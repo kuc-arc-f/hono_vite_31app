@@ -14,11 +14,17 @@
 hono + react SSR + D1 + pages, app sample
 
 * /er_chart: mermaid.js, chart display
-
+* /project : task display
 ***
 ### blog 
 
+* er_chart
+
 https://zenn.dev/knaka0209/scraps/364d0b0fc153db
+
+* gantt
+
+https://zenn.dev/knaka0209/scraps/2392f4bab60fa1
 
 ***
 
