@@ -43,10 +43,10 @@ export default function Page(props: any) {
               </a>
             </div>
             <p>ID: {item.id}, {item.createdAt}</p>
-            {/*
             <a href={`/bookmark_edit/${item.id}`}>
                 <button  className="btn-outline-purple ms-2 my-2">Edit</button>
             </a>              
+            {/*
             */}
             <hr className="my-2" />
           </li>

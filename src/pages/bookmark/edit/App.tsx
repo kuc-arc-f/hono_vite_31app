@@ -24,10 +24,9 @@ console.log(props.item);
             />
             <hr className="my-2" />
             <label>Content:</label>
-            <textarea id="content" name="content"
-            className="border border-gray-400 rounded-md px-3 py-2 w-full h-32 resize-none focus:outline-none focus:border-blue-500"
-            placeholder="" required
-            >{props.item.content}</textarea>
+            <input type="text" id="url"  defaultValue={props.item.url}
+            className="border border-gray-400 rounded-md px-3 py-2 w-full focus:outline-none focus:border-blue-500"
+            />
             <hr className="my-2" />
             <input type="text" className="d-none" id="item_id" defaultValue={props.item.id} />
             <div id="root"></div>
@@ -37,13 +36,11 @@ console.log(props.item);
             {/* TS */}
             {import.meta.env.PROD ? (
             <>
-                <script type="module" src="/static/TaskShow.js"></script>
-                <script type="module" src="/static/TaskEdit.js"></script>
+                <script type="module" src="/static/BookMarkEdit.js"></script>
             </>               
             ) : (
             <>
-                <script type="module" src="/src/client/TaskShow.ts"></script>
-                <script type="module" src="/src/client/TaskEdit.ts"></script>
+                <script type="module" src="/src/client/BookMarkEdit.ts"></script>
             </>                
             )}
         </div>       

@@ -21,20 +21,22 @@ const BookMarkEdit = {
             if(title) {
                 titleValue = title?.value;
             }
-            let contentValue = "";
-            const content = document.querySelector("#content") as HTMLInputElement;
-            if(content) {
-                contentValue = content.value;
-            }            
+            let urlValue = "";
+            const url = document.querySelector("#url") as HTMLInputElement;
+            if(url) {
+                urlValue = url.value;
+            }        
             const item = {
                 //@ts-ignore
                 id: Number(itemId),
                 title: titleValue,
-                content: contentValue,
+                url: urlValue,
+                bmCategoryId: 0,
             }
-//console.log(item);
+console.log(item);
+//return;
             const body = JSON.stringify(item);		
-            const res = await fetch("/api/tasks/update", {
+            const res = await fetch("/api/bookmark/update", {
                 method: 'POST',
                 headers: {'Content-Type': 'application/json'},      
                 body: body
@@ -75,7 +77,46 @@ console.log(json);
         pre_content_text.innerHTML = contentValue;
         MicroModal.show('modal-1');
     },
-
+    /**
+     *
+     * @param
+     *
+     * @return
+     */  
+    delete : async function()
+    {
+        try{
+            let ret = false;
+            const item = {
+                api_key: "",
+                //@ts-ignore
+                id: Number(itemId),
+            }
+console.log(item);
+            const body = JSON.stringify(item);		
+            const res = await fetch("/api/bookmark/delete", {
+                method: 'POST',
+                headers: {'Content-Type': 'application/json'},      
+                body: body
+            });
+            if (res.status !== 200) {
+                console.error("error, status <> 200");
+                throw new Error(await res.text());
+            }
+            const json = await res.json()
+console.log(json);   
+            if (json.ret !==  "OK") {
+                console.error("Error, json.ret <> OK");
+                return ret;
+            }
+            ret = true;
+            return ret;
+        } catch (e) {
+            console.error("Error, delete");
+            console.error(e);
+            throw new Error('Error , delete');
+        }
+    },
     /**
      * startProc
      * @param
@@ -86,18 +127,26 @@ console.log(json);
     {
         try{
 console.log("#startProc");
-//            MicroModal.init();
             //
             const item_id = document.querySelector('#item_id') as HTMLInputElement;
             if(item_id) { itemId = Number(item_id.value);}
 console.log("itemId=", itemId) 
             const button = document.querySelector('#btn_save') as HTMLElement;
             button.addEventListener('click', async () => {
-console.log("btn_save=");
+            //console.log("btn_save=");
                 const result = await this.update();
 console.log("result=", result);
                 if(result === true) {
-                    window.location.href = '/tasks';
+                    window.location.href = '/bookmark';
+                }
+            });
+            //btn_delete
+            const btn_delete = document.querySelector('#btn_delete') as HTMLElement;
+            btn_delete.addEventListener('click', async () => {
+                const result = await this.delete();
+console.log("result=", result);
+                if(result === true) {
+                    window.location.href = '/bookmark';
                 }
             });
         } catch (e) {

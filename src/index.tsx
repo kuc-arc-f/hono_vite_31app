@@ -43,6 +43,7 @@ import TaskGanttIndex from './pages/task_gantt/App';
 /* bookmark */
 import BookMarkIndex from './pages/bookmark/App';
 import BookMarkShow from './pages/bookmark/show/App';
+import BookMarkEdit from './pages/bookmark/edit/App';
 //
 app.get('/', (c) => {
   return c.html(renderToString(Top([])))
@@ -181,6 +182,13 @@ console.log("id=", id);
 console.log(item);
   return c.html(renderToString(<BookMarkShow item={item} id={Number(id)} />));
 });
+app.get('/bookmark_edit/:id', async (c) => { 
+  const {id} = c.req.param();
+console.log("id=", id);
+  const item = await bookMarkRouter.get(c, c.env.DB, id);
+console.log(item);
+  return c.html(renderToString(<BookMarkEdit item={item} id={Number(id)} />));
+});
 
 /******
 API
@@ -288,9 +296,19 @@ app.post('/api/bookmark/create', async (c) => {
   const resulte = await bookMarkRouter.create(body, c.env.DB);
   return c.json(resulte);
 });
+app.post('/api/bookmark/update', async (c) => { 
+  const body = await c.req.json();
+  const resulte = await bookMarkRouter.update(body, c.env.DB);
+  return c.json(resulte);
+});
 app.post('/api/bookmark/get_list', async (c) => { 
   const body = await c.req.json();
   const resulte = await bookMarkRouter.get_list(body, c.env.DB);
+  return c.json(resulte);
+});
+app.post('/api/bookmark/delete', async (c) => { 
+  const body = await c.req.json();
+  const resulte = await bookMarkRouter.delete(body, c.env.DB);
   return c.json(resulte);
 });
 /*

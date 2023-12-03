@@ -92,6 +92,9 @@ console.log(sql);
     delete: async function(body, DB)
     {
         try{    
+            const sql = `
+            DELETE FROM BookMark  WHERE id= ${body.id};
+            `;
 //console.log(body);
             if (body) {
                 await DB.prepare(sql).run();
@@ -114,14 +117,15 @@ console.log(sql);
 console.log(body);
             if (body) {
                 /*
-                const sql = `
-                UPDATE Project 
-                SET name = '${body.name}', InveiteCode = '${body.InveiteCode}'
-                WHERE id = ${body.id}
-                `;
 console.log(sql);
-                await DB.prepare(sql).run();
                 */
+                const sql = `
+                UPDATE BookMark set title = '${body.title}',
+                url = '${body.url}',
+                bmCategoryId = ${body.bmCategoryId}
+                where id= ${body.id}
+                `;
+                await DB.prepare(sql).run();
             }
             return {ret: "OK", data: body};
         } catch (e) {
