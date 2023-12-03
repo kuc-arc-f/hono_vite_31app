@@ -20,6 +20,7 @@ export default function Page(props: any) {
           <a href="/test4"><span className="ps-2">[ Test4 ]</span></a>
           <a href="/er_chart"><span className="ps-2">[ ErChart ]</span></a>
           <a href="/project"><span className="ps-2">[ Project ]</span></a>
+          <a href="/bookmark"><span className="ps-2">[ Bookmark ]</span></a>
         </div>
         <hr />
         <div className ="container mx-auto my-2 px-8 bg-white">{props.children}</div>
@@ -28,5 +29,6 @@ export default function Page(props: any) {
     )
 }
 /*
+http://localhost:5173/bookmark
 <div class="container mx-auto my-2 px-8 bg-white">{props.children}</div>
 */

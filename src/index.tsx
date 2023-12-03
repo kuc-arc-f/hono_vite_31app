@@ -1,6 +1,7 @@
 import { Hono } from 'hono'
 import type { Database } from '@cloudflare/d1'
 import { renderToString } from 'react-dom/server';
+import moment from 'moment';
 //
 interface Env {
   DB: Database
@@ -14,7 +15,8 @@ import todosRouter from './routes/todo';
 import erChartRouter from './routes/ErChart';
 import projectRouter from './routes/Project';
 import taskItemRouter from './routes/TaskItem';
-
+import bmCategoryRouter from './routes/BmCategory';
+import bookMarkRouter from './routes/BookMark';
 //pages
 import Top from './pages/Top';
 import Test1 from './pages/test/App';
@@ -38,6 +40,9 @@ import TaskItemsCreate from './pages/task_items/create/App';
 import TaskItemsShow from './pages/task_items/show/App';
 import TaskItemsEdit from './pages/task_items/edit/App';
 import TaskGanttIndex from './pages/task_gantt/App';
+/* bookmark */
+import BookMarkIndex from './pages/bookmark/App';
+import BookMarkShow from './pages/bookmark/show/App';
 //
 app.get('/', (c) => {
   return c.html(renderToString(Top([])))
@@ -164,6 +169,18 @@ app.get('/task_gantt/:id', async (c) => {
     <TaskGanttIndex items={items} page={1} id={id} project={project} />
   ));
 });
+//bookmark
+app.get('/bookmark', async (c) => { 
+  const items = await bookMarkRouter.get_list(c, c.env.DB, 1);
+  return c.html(renderToString(<BookMarkIndex items={items} page={1} />));
+});
+app.get('/bookmark/:id', async (c) => { 
+  const {id} = c.req.param();
+console.log("id=", id);
+  const item = await bookMarkRouter.get(c, c.env.DB, id);
+console.log(item);
+  return c.html(renderToString(<BookMarkShow item={item} id={Number(id)} />));
+});
 
 /******
 API
@@ -208,13 +225,6 @@ app.post('/api/er_chart/get_list', async (c) => {
   const resulte = await erChartRouter.get_list(c, c.env.DB);
   return c.json({ret: "OK", data: resulte});
 });
-/*
-app.post('/api/er_chart/get', async (c) => { 
-  const body = await c.req.json();
-  const resulte = await erChartRouter.get(body, c, c.env.DB);
-  return c.json({ret: "OK", data: resulte});
-});
-*/
 app.post('/api/er_chart/delete', async (c) => { 
   const body = await c.req.json();
   const resulte = await erChartRouter.delete(body, c.env.DB);
@@ -261,11 +271,31 @@ app.post('/api/tasks/delete', async (c) => {
   const resulte = await taskItemRouter.delete(body, c.env.DB);
   return c.json(resulte);
 });
-/*
-app.post('/api/tasks/get_list', async (c) => { 
+//bmCategoryRouter
+app.post('/api/bm_category/get_list', async (c) => { 
   const body = await c.req.json();
-  const resulte = await taskItemRouter.get_list(body, c.env.DB);
-  return c.json({ret: "OK", data: resulte});
+  const resulte = await bmCategoryRouter.get_list(body, c.env.DB);
+  return c.json(resulte);
+});
+app.post('/api/bm_category/create', async (c) => { 
+  const body = await c.req.json();
+  const resulte = await bmCategoryRouter.create(body, c.env.DB);
+  return c.json(resulte);
+});
+//bookMarkRouter
+app.post('/api/bookmark/create', async (c) => { 
+  const body = await c.req.json();
+  const resulte = await bookMarkRouter.create(body, c.env.DB);
+  return c.json(resulte);
+});
+app.post('/api/bookmark/get_list', async (c) => { 
+  const body = await c.req.json();
+  const resulte = await bookMarkRouter.get_list(body, c.env.DB);
+  return c.json(resulte);
+});
+/*
+app.get('/test11', (c) => { 
+  return c.json([]);
 });
 */
 export default app
