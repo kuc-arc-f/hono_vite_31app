@@ -172,8 +172,11 @@ app.get('/task_gantt/:id', async (c) => {
 });
 //bookmark
 app.get('/bookmark', async (c) => { 
-  const items = await bookMarkRouter.get_list(c, c.env.DB, 1);
-  return c.html(renderToString(<BookMarkIndex items={items} page={1} />));
+  let page = c.req.query('page');
+  if(!page) { page = '1';}
+console.log("page=", page);
+  const items = await bookMarkRouter.get_list_page(c, c.env.DB, page);
+  return c.html(renderToString(<BookMarkIndex items={items} page={page} />));
 });
 app.get('/bookmark/:id', async (c) => { 
   const {id} = c.req.param();

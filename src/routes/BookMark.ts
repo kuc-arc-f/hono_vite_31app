@@ -1,5 +1,7 @@
 import type { Database } from '@cloudflare/d1'
 import moment from 'moment';
+import LibPagenate from '../lib/LibPagenate';
+const perPage: number = 10;
 //
 interface Env {
     DB: Database
@@ -7,6 +9,37 @@ interface Env {
 const retObj = {ret: "NG", data: [], message: "Error, Internal Server Error"};
 //
 const Router = {
+    //searchBookMarks
+    /**
+     *
+     * @param
+     *
+     * @return
+     */
+    get_list_page: async function(c, DB, page)
+    {
+console.log("#get_list");
+        try{    
+            const pinfo = LibPagenate.getPageStart(page, perPage);
+//console.log(pinfo);
+            const sql = `
+            SELECT * FROM BookMark ORDER BY id DESC
+            LIMIT ${pinfo.end}
+            OFFSET ${pinfo.start};
+            `;
+console.log(sql);
+            const result = await DB.prepare(sql).all();
+//console.log(result.results);
+            if(result.results.length < 1) {
+                console.error("Error, results.length < 1");
+                return [];
+            }
+            return result.results;
+        } catch (e) {
+            console.error(e);
+            return [];
+        } 
+    },
     /**
      * route
      * @param

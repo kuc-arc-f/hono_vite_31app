@@ -6,7 +6,7 @@ let nextPage = 1;
 let beforePage = 1;
 //
 export default function Page(props: any) {
-  console.log(props);
+//console.log(props);
   if(props.page){
     nextPage = Number(props.page) + 1;
     beforePage = Number(props.page) - 1;
@@ -31,6 +31,17 @@ export default function Page(props: any) {
         </div>
         <button id="save" className="btn-purple ms-2 my-2">Save</button>
         <hr className="my-2" />
+        {/*
+        <div className="mb-2 search_key_wrap">
+          <button className="btn btn-sm btn-outline-primary" id="btn_clear">Clear</button>
+          <span className="search_key_wrap">
+              <input type="text" className="mx-2 " name="searchKey" id="searchKey"
+              placeholder="Title search Key" />        
+          </span>
+          <button className="btn btn-sm btn-outline-primary">Search</button>
+        </div>
+        <hr className="my-2" />
+        */}
         <ul>
         {props.items.map((item: any) => {
           return (
