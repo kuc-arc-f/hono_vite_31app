@@ -6,7 +6,7 @@
 
  date    : 2023/11/24
 
- update  : 2023/12/03
+ update  : 2023/12/04
 
 ***
 ### Summary
@@ -15,6 +15,8 @@ hono + react SSR + D1 + pages, app sample
 
 * /er_chart: mermaid.js, chart display
 * /project : task display
+* /bookmark : bookmark display
+
 ***
 ### blog 
 
