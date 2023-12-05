@@ -16,20 +16,24 @@ export default function Page(props: any) {
   return (
   <Layout>
     <div>
-        <h1 className="text-4xl font-bold">BookMark-index</h1>
+      <h1 className="text-4xl font-bold">BookMark</h1>
         <hr className="my-2" />
-        <label className="text-2xl block text-gray-700 font-bold mb-2">Title:</label>
-        <input type="text" id="title" 
-        className="border border-gray-400 rounded-md px-3 py-2 w-full focus:outline-none focus:border-blue-500"
-        />
-        <br />
-        <div className="mb-2">
-          <label  className="text-2xl block text-gray-700 font-bold mb-2">URL</label>
-          <input type="text" id="url" 
+        <div className="bg-blue-100 p-4">
+          <label className="text-2xl block text-gray-700 font-bold mb-2">Title:</label>
+          <input type="text" id="title" 
           className="border border-gray-400 rounded-md px-3 py-2 w-full focus:outline-none focus:border-blue-500"
           />
+          <br />
+          <div className="mb-2">
+            <label  className="text-2xl block text-gray-700 font-bold mb-2">URL</label>
+            <input type="text" id="url" 
+            className="border border-gray-400 rounded-md px-3 py-2 w-full focus:outline-none focus:border-blue-500"
+            placeholder="ex: https://url-input-123456789.com"
+            />
+          </div>
+          <button id="save" className="btn-purple ms-2 my-2">Save</button>
+
         </div>
-        <button id="save" className="btn-purple ms-2 my-2">Save</button>
         <hr className="my-2" />
         {/*
         <div className="mb-2 search_key_wrap">

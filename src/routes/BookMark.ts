@@ -9,7 +9,7 @@ interface Env {
 const retObj = {ret: "NG", data: [], message: "Error, Internal Server Error"};
 //
 const Router = {
-    //searchBookMarks
+    //search_BookMarks
     /**
      *
      * @param
