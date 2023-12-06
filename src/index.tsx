@@ -10,13 +10,15 @@ interface Env {
 const app = new Hono()
 //routes
 import testRouter from './routes/test';
-import taskRouter from './routes/tasks';
+//import taskRouter from './routes/tasks';
 import todosRouter from './routes/todo';
 import erChartRouter from './routes/ErChart';
 import projectRouter from './routes/Project';
 import taskItemRouter from './routes/TaskItem';
 import bmCategoryRouter from './routes/BmCategory';
 import bookMarkRouter from './routes/BookMark';
+import memoRouter from './routes/memo';
+
 //pages
 import Top from './pages/Top';
 import Test1 from './pages/test/App';
@@ -44,6 +46,10 @@ import TaskGanttIndex from './pages/task_gantt/App';
 import BookMarkIndex from './pages/bookmark/App';
 import BookMarkShow from './pages/bookmark/show/App';
 import BookMarkEdit from './pages/bookmark/edit/App';
+/* memo */
+import MemoIndex from './pages/memo/App';
+import MemoShow from './pages/memo/show/App';
+import MemoCreate from './pages/memo/create/App';
 //
 app.get('/', (c) => {
   return c.html(renderToString(Top([])))
@@ -192,7 +198,24 @@ console.log("id=", id);
 console.log(item);
   return c.html(renderToString(<BookMarkEdit item={item} id={Number(id)} />));
 });
-
+//memo
+app.get('/memo', async (c) => { 
+  const items = await memoRouter.get_list(c, c.env.DB);
+  return c.html(renderToString(<MemoIndex items={items} page={1} />));
+});
+app.get('/memo/create', async (c) => { 
+//  let page = c.req.query('page');
+//  if(!page) { page = '1';}
+//console.log("page=", page);
+  return c.html(renderToString(<MemoCreate items={[]} page={1} />));
+});
+app.get('/memo/:id', async (c) => { 
+  const {id} = c.req.param();
+console.log("id=", id);
+  const item = await memoRouter.get(c, c.env.DB, id);
+console.log(item);
+  return c.html(renderToString(<MemoShow item={item} id={Number(id)} />));
+});
 /******
 API
 ******/
@@ -314,9 +337,17 @@ app.post('/api/bookmark/delete', async (c) => {
   const resulte = await bookMarkRouter.delete(body, c.env.DB);
   return c.json(resulte);
 });
-/*
-app.get('/test11', (c) => { 
-  return c.json([]);
+//memoRouter
+app.post('/api/memo/create', async (c) => { 
+  const body = await c.req.json();
+  const resulte = await memoRouter.create(body, c.env.DB);
+  return c.json(resulte);
 });
-*/
+app.post('/api/memo/get_list', async (c) => { 
+  const body = await c.req.json();
+  const resulte = await memoRouter.get_list(body, c.env.DB);
+  return c.json(resulte);
+});
+//get: async function(body, c, DB)
+
 export default app
