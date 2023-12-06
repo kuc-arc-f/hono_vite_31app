@@ -1,11 +1,13 @@
 
 import Layout from '../../layout';
 import React from 'react';
-
+import { marked } from 'marked';
 //
 export default function Page(props: any) {
 console.log("#taskShow");
 console.log(props.item);
+const content = marked.parse(props.item.content);
+console.log(content);
     return (
     <Layout title="TaskShow">
         <div>
@@ -18,7 +20,7 @@ console.log(props.item);
             </p>
             <hr className="my-2" />
             content:<br />
-            <pre>{props.item.content}</pre>
+            <div dangerouslySetInnerHTML={{ __html: content }} />
             <hr className="my-2" />
             <input type="text" className="d-none" id="item_id" defaultValue={props.item.id} />
             <div id="root"></div>
@@ -34,8 +36,7 @@ console.log(props.item);
     </Layout>
     )
 }
-
-
 /*
+<pre>{props.item.content}</pre>
 {html`<script src="/js/tasks/delete.js?${timeStamp}"></script>`}
 */
