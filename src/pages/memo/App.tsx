@@ -18,6 +18,7 @@ export default function Page(props: any) {
     <div>
         <h1 className="text-4xl font-bold">mdMemo-index</h1>
         <hr className="my-2" />
+        {/*
         <label className="text-2xl block text-gray-700 font-bold mb-2">Title:</label>
         <input type="text" id="title" 
         className="border border-gray-400 rounded-md px-3 py-2 w-full focus:outline-none focus:border-blue-500"/>
@@ -30,6 +31,7 @@ export default function Page(props: any) {
           ></textarea>
         </div>
         <button id="save" className="btn-purple ms-2 my-2">Save</button>
+        */}
         <hr className="my-2" />
         <a href="/memo/create" className="btn-purple ms-2 my-2">Create</a>
         <hr className="my-2" />

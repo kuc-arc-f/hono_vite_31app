@@ -55,6 +55,7 @@ console.log(json);
     initProc: function() {
         //console.log("init");
         //btn
+        /*
         const button = document.querySelector('#save');
         button?.addEventListener('click', async () => {
             const result = await this.addItem();
@@ -63,6 +64,7 @@ console.log("result=", result);
                 location.reload();
             }
         }); 
+        */
     },
 }
 MemoIndex.initProc();
