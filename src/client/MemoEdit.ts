@@ -3,7 +3,7 @@ import MicroModal from 'micromodal';
 let itemId = 0;
 
 //@ts-ignore
-//console.log("#TaskEdit.client=");
+console.log("#MemoEdit.client=");
 //
 const MemoEdit = {
     /**
@@ -32,9 +32,9 @@ const MemoEdit = {
                 title: titleValue,
                 content: contentValue,
             }
-//console.log(item);
+console.log(item);
             const body = JSON.stringify(item);		
-            const res = await fetch("/api/tasks/update", {
+            const res = await fetch("/api/memo/update", {
                 method: 'POST',
                 headers: {'Content-Type': 'application/json'},      
                 body: body
@@ -97,7 +97,7 @@ console.log("btn_save=");
                 const result = await this.update();
 console.log("result=", result);
                 if(result === true) {
-                    window.location.href = '/tasks';
+//                    window.location.href = '/tasks';
                 }
             });
         } catch (e) {

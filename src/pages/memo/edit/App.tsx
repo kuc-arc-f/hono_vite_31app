@@ -10,7 +10,7 @@ console.log(props.item);
     <Layout title="TaskEdit">
         <div>
             <div>
-            <a href="/tasks" className="btn-outline-purple ms-2 my-2">back</a>
+            <a href="/memo" className="btn-outline-purple ms-2 my-2">back</a>
             <hr className="my-4" />
             <h1 className="text-4xl font-bold">{props.item.title}</h1>
             <p>ID: {props.item.id}
@@ -33,17 +33,17 @@ console.log(props.item);
             <div id="root"></div>
             <button id="btn_save" className="btn-purple ms-2 my-2">Save</button>
             <hr className="my-2" />
+            {/*
             <button id="btn_delete" className="btn-red ms-2 my-2">Delete</button>
+            */}
             {/* TS */}
             {import.meta.env.PROD ? (
             <>
-                <script type="module" src="/static/TaskShow.js"></script>
-                <script type="module" src="/static/TaskEdit.js"></script>
+                <script type="module" src="/static/MemoEdit.js"></script>
             </>               
             ) : (
             <>
-                <script type="module" src="/src/client/TaskShow.ts"></script>
-                <script type="module" src="/src/client/TaskEdit.ts"></script>
+                <script type="module" src="/src/client/MemoEdit.ts"></script>
             </>                
             )}
         </div>       

@@ -113,13 +113,6 @@ console.log(moment().format("YYYY-MM-DD 00:00:00"));
                 VALUES('${body.title}', '${body.content}',
                 '${dt}', 0);
                 `;
-                /*
-                const text = `
-                INSERT INTO public."Memo" (title, content, 
-                "userId", "createdAt", "updatedAt") 
-                VALUES($1, $2, $3, current_timestamp, current_timestamp) RETURNING *
-                `;
-                */
                 //console.log(sql);
                 await DB.prepare(sql).run();
             }
@@ -147,7 +140,7 @@ console.log(body);
                 `;
                 */
                 const sql = `
-                UPDATE Task 
+                UPDATE Memo 
                 SET title = '${body.title}', content='${body.content}'
                 WHERE id = ${body.id}
                 `;

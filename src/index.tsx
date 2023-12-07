@@ -49,6 +49,7 @@ import BookMarkEdit from './pages/bookmark/edit/App';
 /* memo */
 import MemoIndex from './pages/memo/App';
 import MemoShow from './pages/memo/show/App';
+import MemoEdit from './pages/memo/edit/App';
 import MemoCreate from './pages/memo/create/App';
 //
 app.get('/', (c) => {
@@ -216,6 +217,13 @@ console.log("id=", id);
 console.log(item);
   return c.html(renderToString(<MemoShow item={item} id={Number(id)} />));
 });
+app.get('/memo_edit/:id', async (c) => { 
+  const {id} = c.req.param();
+console.log("id=", id);
+  const item = await memoRouter.get(c, c.env.DB, id);
+console.log(item);
+  return c.html(renderToString(<MemoEdit item={item} id={Number(id)} />));
+});
 /******
 API
 ******/
@@ -348,6 +356,10 @@ app.post('/api/memo/get_list', async (c) => {
   const resulte = await memoRouter.get_list(body, c.env.DB);
   return c.json(resulte);
 });
-//get: async function(body, c, DB)
+app.post('/api/memo/update', async (c) => { 
+  const body = await c.req.json();
+  const resulte = await memoRouter.update(body, c.env.DB);
+  return c.json(resulte);
+});
 
 export default app

@@ -32,7 +32,6 @@ export default function Page(props: any) {
         </div>
         <button id="save" className="btn-purple ms-2 my-2">Save</button>
         */}
-        <hr className="my-2" />
         <a href="/memo/create" className="btn-purple ms-2 my-2">Create</a>
         <hr className="my-2" />
         <ul>
