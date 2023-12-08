@@ -40,6 +40,14 @@ https://zenn.dev/knaka0209/scraps/5b7fb1cd51a567
 ***
 ### Screen
 
+* er_chart
+
 ![img](http://drive.google.com/uc?export=view&id=1dMpTFnZxbnhOh9DvOJY_BT-RL9AXfQaM)
+
+***
+
+* project(gantt)
+
+![img](http://drive.google.com/uc?export=view&id=1ZlmGRckk33z5eucGbWpFQyLbzvzOjd_9)
 
 ***
