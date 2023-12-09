@@ -75,7 +75,46 @@ console.log(json);
         pre_content_text.innerHTML = contentValue;
         MicroModal.show('modal-1');
     },
-
+    /**
+     *
+     * @param
+     *
+     * @return
+     */  
+    delete : async function()
+    {
+        try{
+            let ret = false;
+            const item = {
+                api_key: "",
+                //@ts-ignore
+                id: Number(itemId),
+            }
+console.log(item);
+            const body = JSON.stringify(item);		
+            const res = await fetch("/api/memo/delete", {
+                method: 'POST',
+                headers: {'Content-Type': 'application/json'},      
+                body: body
+            });
+            if (res.status !== 200) {
+                console.error("error, status <> 200");
+                throw new Error(await res.text());
+            }
+            const json = await res.json()
+console.log(json);   
+            if (json.ret !==  "OK") {
+                console.error("Error, json.ret <> OK");
+                return ret;
+            }
+            ret = true;
+            return ret;
+        } catch (e) {
+            console.error("Error, delete");
+            console.error(e);
+            throw new Error('Error , delete');
+        }
+    },
     /**
      * startProc
      * @param
@@ -97,7 +136,16 @@ console.log("btn_save=");
                 const result = await this.update();
 console.log("result=", result);
                 if(result === true) {
-//                    window.location.href = '/tasks';
+                    window.location.href = '/memo';
+                }
+            });
+            //btn_delete
+            const btn_delete = document.querySelector('#btn_delete') as HTMLElement;
+            btn_delete.addEventListener('click', async () => {
+                const result = await this.delete();
+console.log("result=", result);
+                if(result === true) {
+                    window.location.href = '/memo';
                 }
             });
         } catch (e) {

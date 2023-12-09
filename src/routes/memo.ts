@@ -1,6 +1,7 @@
-//import { Hono } from "hono";
 import type { Database } from '@cloudflare/d1'
 import moment from 'moment';
+import LibPagenate from '../lib/LibPagenate';
+const perPage: number = 10;
 //
 interface Env {
     DB: Database
@@ -9,11 +10,36 @@ const retObj = {ret: "NG", data: [], message: "Error, Internal Server Error"};
 
 const Router = {
     /**
-     * route
+     *
      * @param
      *
      * @return
-     */ 
+     */
+    get_list_page: async function(c, DB, page)
+    {
+console.log("#get_list");
+        try{    
+            const pinfo = LibPagenate.getPageStart(page, perPage);
+//console.log(pinfo);
+            const sql = `
+            SELECT * FROM Memo ORDER BY id DESC
+            LIMIT ${pinfo.end}
+            OFFSET ${pinfo.start};
+            `;
+console.log(sql);
+            const result = await DB.prepare(sql).all();
+//console.log(result.results);
+            if(result.results.length < 1) {
+                console.error("Error, results.length < 1");
+                return [];
+            }
+            return result.results;
+        } catch (e) {
+            console.error(e);
+            return [];
+        } 
+    },    
+    /*
     test1: async function(DB)
     {
         try{    
@@ -29,27 +55,7 @@ const Router = {
             return Response.json(retObj);
         } 
     },   
-    /**
-     * route
-     * @param
-     *
-     * @return
-     */ 
-    test10: async function(c, DB)
-    {
-        try{    
-            const result = await DB.prepare(`SELECT * FROM Task ORDER BY id DESC`).all();
-    console.log(result.results);
-            if(result.results.length < 1) {
-                console.error("Error, results.length < 1");
-                return Response.json({ret: "OK", data: []});
-            }
-            return result.results;
-        } catch (e) {
-            console.error(e);
-            return [];
-        } 
-    },
+    */
     /**
      *
      * @param
@@ -165,7 +171,7 @@ console.log(sql);
 console.log(body);
             if (body) {
                 const sql = `
-                DELETE FROM Task  WHERE id= ${body.id};
+                DELETE FROM Memo  WHERE id= ${body.id};
                 `;
 console.log(sql);
                 await DB.prepare(sql).run();

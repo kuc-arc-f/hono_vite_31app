@@ -24,19 +24,20 @@ console.log(content);
             <hr className="my-2" />
             <input type="text" className="d-none" id="item_id" defaultValue={props.item.id} />
             <div id="root"></div>
-            <button id="btn_delete" className="btn-red ms-2 my-2">Delete</button>
             {/* TS */}
+            {/*
             {import.meta.env.PROD ? (
                 <script src="/static/TaskShow.js"></script>
             ) : (
                 <script src="/src/client/TaskShow.ts"></script>
             )}
+            */}
         </div>       
         </div>
     </Layout>
     )
 }
 /*
-<pre>{props.item.content}</pre>
+<button id="btn_delete" className="btn-red ms-2 my-2">Delete</button>
 {html`<script src="/js/tasks/delete.js?${timeStamp}"></script>`}
 */

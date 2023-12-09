@@ -201,13 +201,14 @@ console.log(item);
 });
 //memo
 app.get('/memo', async (c) => { 
-  const items = await memoRouter.get_list(c, c.env.DB);
-  return c.html(renderToString(<MemoIndex items={items} page={1} />));
+  let page = c.req.query('page');
+  if(!page) { page = '1';}
+console.log("page=", page);  
+//  const items = await memoRouter.get_list(c, c.env.DB);
+  const items = await memoRouter.get_list_page(c, c.env.DB, page);
+  return c.html(renderToString(<MemoIndex items={items} page={page} />));
 });
 app.get('/memo/create', async (c) => { 
-//  let page = c.req.query('page');
-//  if(!page) { page = '1';}
-//console.log("page=", page);
   return c.html(renderToString(<MemoCreate items={[]} page={1} />));
 });
 app.get('/memo/:id', async (c) => { 
@@ -359,6 +360,11 @@ app.post('/api/memo/get_list', async (c) => {
 app.post('/api/memo/update', async (c) => { 
   const body = await c.req.json();
   const resulte = await memoRouter.update(body, c.env.DB);
+  return c.json(resulte);
+});
+app.post('/api/memo/delete', async (c) => { 
+  const body = await c.req.json();
+  const resulte = await memoRouter.delete(body, c.env.DB);
   return c.json(resulte);
 });
 

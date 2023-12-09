@@ -54,9 +54,9 @@ export default function Page(props: any) {
         </ul>
         {/* paginate */}
         <div className="paginate_wrap py-2">
-          <a href={`/tasks?page=${beforePage}`}><button className="btn-outline-purple"> ＜ </button>
+          <a href={`/memo?page=${beforePage}`}><button className="btn-outline-purple"> ＜ </button>
           </a>
-          <a href={`/tasks?page=${nextPage}`}><button className="btn-outline-purple"> ＞ </button>
+          <a href={`/memo?page=${nextPage}`}><button className="btn-outline-purple"> ＞ </button>
           </a>
         </div>
         <hr className="my-8" />
