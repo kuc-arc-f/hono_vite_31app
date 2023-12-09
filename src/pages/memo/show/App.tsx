@@ -12,6 +12,7 @@ console.log(content);
     <Layout title="TaskShow">
         <div>
             <div>
+            <link href="/static/postshow.css" rel="stylesheet" />
             <a href="/memo" className="btn-outline-purple ms-2 my-2">back</a>
             <hr className="my-4" />
             <h1 className="text-4xl font-bold">{props.item.title}</h1>
