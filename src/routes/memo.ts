@@ -39,23 +39,38 @@ console.log(sql);
             return [];
         } 
     },    
-    /*
-    test1: async function(DB)
+        /**
+     *
+     * @param
+     *
+     * @return
+     */ 
+    search: async function(body, DB)
     {
+//console.log("#search");
         try{    
-            const result = await DB.prepare(`SELECT * FROM TaskORDER BY id DESC`).all();
-    console.log(result.results);
-            if(result.results.length < 1) {
-                console.error("Error, results.length < 1");
-                return Response.json({ret: "OK", data: []});
+            if (body) {
+                const sql = `
+                SELECT * FROM Memo
+                WHERE title like '%${body.seachKey}%'
+                ORDER BY id DESC
+                LIMIT 100
+                `;  
+console.log(sql);
+                const result = await DB.prepare(sql).all();
+                //console.log(result.results);
+                if(result.results.length < 1) {
+                    console.error("Error, results.length < 1");
+                    return [];
+                }
+                return result.results;
             }
-            return Response.json({ret: "OK", data: result.results});
+            return [];
         } catch (e) {
             console.error(e);
-            return Response.json(retObj);
+            return [];
         } 
-    },   
-    */
+    },
     /**
      *
      * @param

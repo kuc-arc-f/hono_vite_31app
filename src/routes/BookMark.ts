@@ -62,6 +62,38 @@ console.log(sql);
         } 
     },
     /**
+     *
+     * @param
+     *
+     * @return
+     */ 
+    search: async function(body, DB)
+    {
+//console.log("#search");
+        try{    
+            if (body) {
+                const sql = `
+                SELECT * FROM BookMark
+                WHERE title like '%${body.seachKey}%'
+                ORDER BY id DESC
+                LIMIT 100
+                `;  
+console.log(sql);
+                const result = await DB.prepare(sql).all();
+                //console.log(result.results);
+                if(result.results.length < 1) {
+                    console.error("Error, results.length < 1");
+                    return [];
+                }
+                return result.results;
+            }
+            return [];
+        } catch (e) {
+            console.error(e);
+            return [];
+        } 
+    },
+    /**
      * 
      * @param
      *

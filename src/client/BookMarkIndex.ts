@@ -2,9 +2,9 @@ import { h, Component, render } from 'preact';
 import htm from 'htm';
 
 const html = htm.bind(h);
-console.log("#MemoIndex.client.ts");
+console.log("#BookMarkIndex.ts");
 //
-const MemoIndex = {
+const BookMarkIndex = {
     /**
      *
      * @param
@@ -18,7 +18,7 @@ const MemoIndex = {
             const item = {
             }
             const body = JSON.stringify(item);		
-            const res = await fetch("/api/memo/get_list", {
+            const res = await fetch("/api/bookmark/get_list", {
                 method: 'POST',
                 headers: {'Content-Type': 'application/json'},      
                 body: body
@@ -35,56 +35,7 @@ console.log(json);
             console.error(e);
             throw new Error('Error , getList');
         }
-    },     
-    /**
-     *
-     * @param
-     *
-     * @return
-     */  
-    addItem : async function()
-    {
-        try{
-            let ret = false;
-            let titleValue = "";
-            const title = document.querySelector("#title") as HTMLInputElement;
-            if(title) {
-                titleValue = title.value;
-            }
-            let contentValue = "";
-            const content = document.querySelector("#content") as HTMLInputElement;
-            if(content) {
-                contentValue = content.value;
-            }              
-            const item = {
-                title: titleValue,
-                content: contentValue,
-            }
-console.log("title=", titleValue);
-            const body = JSON.stringify(item);		
-            const res = await fetch("/api/memo/create", {
-                method: 'POST',
-                headers: {'Content-Type': 'application/json'},      
-                body: body
-            });
-            const json = await res.json()
-console.log(json);   
-            if (res.status !== 200) {
-                console.error("error, status <> 200");
-                throw new Error(await res.text());
-            }
-            if (json.ret !==  "OK") {
-                console.error("Error, json.ret <> OK");
-                return ret;
-            }
-            ret = true;
-            return ret;
-        } catch (e) {
-            console.error("Error, addItem");
-            console.error(e);
-            throw new Error('Error , addItem');
-        }
-    }, 
+    },  
     /**
      *
      * @param
@@ -98,13 +49,10 @@ console.log(json);
             items.forEach((element) => {
                 li.push(html`
                 <div>
-                    <a href="/memo/${element.id}"><h3 class="text-3xl font-bold"
-                    >${element.title}</h3></a>                    
-                    <p>id: ${element.id}</p>
-                    <a href="/memo/${element.id}">
-                        <button  class="btn-outline-purple ms-2 my-2">Show</button>
-                    </a>
-                    <a href="/memo_edit/${element.id}">
+                    <a href="${element.url}" target="_blank"><h3 className="text-3xl font-bold"
+                    >${element.title}</h3></a>
+                    <p>id: ${element.id}, ${element.createdAt}</p>
+                    <a href="/bookmark_edit/${element.id}">
                         <button  class="btn-outline-purple ms-2 my-2">Edit</button>
                     </a>
                     <hr class="my-2" />
@@ -118,7 +66,7 @@ console.log(json);
             console.error(e);
             throw new Error('Error , displayItems');
         }
-    },
+    },    
     /**
      *
      * @param
@@ -135,7 +83,7 @@ console.log(json);
               seachKey: seachKey,
             }
             const body = JSON.stringify(item);		
-            const res = await fetch("/api/memo/search", {
+            const res = await fetch("/api/bookmark/search", {
                 method: 'POST',
                 headers: {'Content-Type': 'application/json'},      
                 body: body
@@ -152,20 +100,22 @@ console.log(json);
             console.error(e);
             throw new Error('Error , search');
         }
-    },      
-    /**/
+    },    
+    /**
+     *
+     * @param
+     *
+     * @return
+     */
     initProc: async function() {
-        //console.log("init");
         const res = await this.getList();
         const li = [];
 console.log(res);
         this.displayItems(res);
-        //btn
+        //console.log("init");
         const button = document.querySelector('#btn_search');
         button?.addEventListener('click', async () => {
             const res = await this.search();
-//            const data = res.data;
-            //console.log(data);
             this.displayItems(res);
         }); 
         /*
@@ -180,4 +130,4 @@ console.log("result=", result);
         */
     },
 }
-MemoIndex.initProc();
+BookMarkIndex.initProc();

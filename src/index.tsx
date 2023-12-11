@@ -225,6 +225,7 @@ console.log("id=", id);
 console.log(item);
   return c.html(renderToString(<MemoEdit item={item} id={Number(id)} />));
 });
+
 /******
 API
 ******/
@@ -341,6 +342,11 @@ app.post('/api/bookmark/get_list', async (c) => {
   const resulte = await bookMarkRouter.get_list(body, c.env.DB);
   return c.json(resulte);
 });
+app.post('/api/bookmark/search', async (c) => { 
+  const body = await c.req.json();
+  const resulte = await bookMarkRouter.search(body, c.env.DB);
+  return c.json(resulte);
+});
 app.post('/api/bookmark/delete', async (c) => { 
   const body = await c.req.json();
   const resulte = await bookMarkRouter.delete(body, c.env.DB);
@@ -357,6 +363,11 @@ app.post('/api/memo/get_list', async (c) => {
   const resulte = await memoRouter.get_list(body, c.env.DB);
   return c.json(resulte);
 });
+app.post('/api/memo/search', async (c) => { 
+  const body = await c.req.json();
+  const resulte = await memoRouter.search(body, c.env.DB);
+  return c.json(resulte);
+});
 app.post('/api/memo/update', async (c) => { 
   const body = await c.req.json();
   const resulte = await memoRouter.update(body, c.env.DB);
@@ -367,5 +378,4 @@ app.post('/api/memo/delete', async (c) => {
   const resulte = await memoRouter.delete(body, c.env.DB);
   return c.json(resulte);
 });
-
 export default app

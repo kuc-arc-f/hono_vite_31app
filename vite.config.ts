@@ -14,6 +14,7 @@ export default defineConfig(({ mode }) => {
             './src/client/Page4.ts',
             './src/client/BookMarkCreate.ts',
             './src/client/BookMarkEdit.ts',
+            './src/client/BookMarkIndex.ts',
             './src/client/TaskItemCreate.ts',
             './src/client/TaskItemShow.ts',
             './src/client/TaskItemEdit.ts',
