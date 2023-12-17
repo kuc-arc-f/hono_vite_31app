@@ -79,9 +79,14 @@ console.log(sql);
      */ 
     get_list: async function(c, DB)
     {
-console.log("#get_list");
+//console.log("#get_list");
         try{    
-            const result = await DB.prepare(`SELECT * FROM Memo ORDER BY id DESC`).all();
+            const sql = `SELECT * FROM Memo
+             ORDER BY id DESC LIMIT 100
+             `;
+console.log(sql);
+//            const result = await DB.prepare(`SELECT * FROM Memo ORDER BY id DESC`).all();
+            const result = await DB.prepare(sql).all();
 //console.log(result.results);
             if(result.results.length < 1) {
                 console.error("Error, results.length < 1");

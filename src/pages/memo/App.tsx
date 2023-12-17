@@ -6,7 +6,7 @@ let nextPage = 1;
 let beforePage = 1;
 //
 export default function Page(props: any) {
-  console.log(props);
+//console.log(props);
   if(props.page){
     nextPage = Number(props.page) + 1;
     beforePage = Number(props.page) - 1;
@@ -33,12 +33,6 @@ export default function Page(props: any) {
         <hr className="my-2" />
         <div id="root"></div>
         {/* paginate */}
-        <div className="paginate_wrap py-2">
-          <a href={`/memo?page=${beforePage}`}><button className="btn-outline-purple"> ＜ </button>
-          </a>
-          <a href={`/memo?page=${nextPage}`}><button className="btn-outline-purple"> ＞ </button>
-          </a>
-        </div>
         <hr className="my-8" />
         {/* JS */}
         {import.meta.env.PROD ? (
@@ -52,22 +46,10 @@ export default function Page(props: any) {
 }
 
 /*
-        <ul>
-        {props.items.map((item: any) => {
-          return (
-          <li key={item.id}>
-            <a href={`/memo/${item.id}`}><h3 className="text-3xl font-bold"
-            >{item.title}</h3></a>
-            <p>ID: {item.id}, {item.createdAt}</p>
-            <a href={`/memo/${item.id}`}>
-                <button  className="btn-outline-purple ms-2 my-2">Show</button>
-            </a>
-            <a href={`/memo_edit/${item.id}`}>
-                <button  className="btn-outline-purple ms-2 my-2">Edit</button>
-            </a>              
-            <hr />
-          </li>
-          );
-        })}
-        </ul>
+        <div className="paginate_wrap py-2">
+          <a href={`/memo?page=${beforePage}`}><button className="btn-outline-purple"> ＜ </button>
+          </a>
+          <a href={`/memo?page=${nextPage}`}><button className="btn-outline-purple"> ＞ </button>
+          </a>
+        </div>
 */

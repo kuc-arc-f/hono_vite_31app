@@ -164,7 +164,6 @@ console.log(res);
         const button = document.querySelector('#btn_search');
         button?.addEventListener('click', async () => {
             const res = await this.search();
-//            const data = res.data;
             //console.log(data);
             this.displayItems(res);
         }); 
